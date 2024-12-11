@@ -1,0 +1,21 @@
+Feature: Compose button Email Functionality
+
+  Background:
+    Given the user is logged into Gmail successfully
+    And the user is landed on the Gmail home page
+
+  Scenario Outline: Sending an email with positive and negative data combinations
+    When the user clicks on the "Compose" button
+    And user enters "<subject>" in the subject field
+    And user enters "<body>" in the body field
+    And user enters "<recipient>" in the recipient field
+    And user clicks the "Send" button
+    Then user see "<expectedResult>"
+
+    Examples:
+      | subject    | body                   | recipient          | expectedResult                                             |
+      | Incubyte   | QA test for Incubyte   | vishnu.menon742@gmail.com | The email is sent successfully, and a confirmation appears|
+      | Incubyte   | QA test for Incubyte   | abc.com    | An error message popup is displayed stating that email address is invalid |
+      |            | QA test for Incubyte   | sharjun@gmail.com | A popup appears stating the subject is missing|
+      | Incubyte   |                       | arjun@gmail.com | Without a body, email is sent|
+      | Incubyte   | QA test for Incubyte   |                     | An error message is displayed stating that the recipient is missing   |
